@@ -2,21 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::group(['prefix' => 'contacts'], function () {
+    Route::get('/', 'App\Http\Controllers\ContactController@index');
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('/{id}', 'App\Http\Controllers\ContactController@show');
+
+    Route::get('/{id}/{name}', 'App\Http\Controllers\ContactController@showWithName')
+        ->where(['name' => '[a-zA-Z]+']);
+
+    Route::get('/create', 'App\Http\Controllers\ContactController@create');
+
+    Route::post('/', 'App\Http\Controllers\ContactController@store');
+
+    Route::get('/{id}/edit', 'App\Http\Controllers\ContactController@edit');
+
+    Route::put('/{id}', 'App\Http\Controllers\ContactController@update');
+
+    Route::delete('/{id}', 'App\Http\Controllers\ContactController@destroy');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
