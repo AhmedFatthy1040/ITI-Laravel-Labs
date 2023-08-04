@@ -16,5 +16,5 @@ class Track extends Model
         'description',
     ];
 
-    // Add any other relationships, methods, or properties relevant to the Track model here.
+    
 }

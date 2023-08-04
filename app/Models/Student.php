@@ -18,5 +18,5 @@ class Student extends Model
         'age',
     ];
 
-    // Add any other relationships, methods, or properties relevant to the Student model here.
+    
 }

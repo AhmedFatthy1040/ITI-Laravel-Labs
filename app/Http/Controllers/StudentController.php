@@ -24,7 +24,7 @@ class StudentController extends Controller
             'name' => 'required',
             'IDno' => 'required|unique:students',
             'track_id' => 'required|exists:tracks,id',
-            'age' => 'nullable|integer', // Validate the 'age' field (optional)
+            'age' => 'nullable|integer',
         ]);
 
         Student::create($validatedData);
