@@ -3,25 +3,35 @@
 @section('content')
     <h1>Edit Student</h1>
 
-    <form action="{{ route('students.update', ['student' => $student->id]) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <!-- Bind the student model data to the form -->
+    {!! Form::model($student, ['route' => ['students.update', $student->id], 'method' => 'PUT']) !!}
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ $student->name }}" required>
+            {!! Form::label('name', 'Name:') !!}
+            {!! Form::text('name', null, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'required']) !!}
+            @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
-            <label for="IDno">ID Number:</label>
-            <input type="text" name="IDno" id="IDno" class="form-control" value="{{ $student->IDno }}" required>
+            {!! Form::label('IDno', 'ID Number:') !!}
+            {!! Form::text('IDno', null, ['class' => 'form-control' . ($errors->has('IDno') ? ' is-invalid' : ''), 'required']) !!}
+            @error('IDno')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
-            <label for="track_id">Track ID:</label>
-            <input type="text" name="track_id" id="track_id" class="form-control" value="{{ $student->track_id }}" required>
+            {!! Form::label('track_id', 'Track:') !!}
+            {!! Form::select('track_id', $tracks->pluck('name', 'id'), null, ['class' => 'form-control' . ($errors->has('track_id') ? ' is-invalid' : ''), 'required']) !!}
+            @error('track_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
-            <label for="age">Age:</label>
-            <input type="number" name="age" id="age" class="form-control" value="{{ $student->age }}" required>
+            {!! Form::label('age', 'Age:') !!}
+            {!! Form::number('age', null, ['class' => 'form-control', 'required']) !!}
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+        <div class="form-group">
+            {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+        </div>
+    {!! Form::close() !!}
 @endsection
